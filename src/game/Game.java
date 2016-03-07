@@ -1,15 +1,10 @@
 package game;
-
-import java.util.ArrayList;
-
-import game.fields.EmptyField;
-import game.fields.Field;
-import game.fields.WallField;
+import game.boardbuilders.BoardBuilderInterface;
 
 public class Game {
 	protected int x;
 	protected int y;
-	protected Field[][] board;
+	protected Board board;
 	protected int n;
 	
 	public Game(int n) {
@@ -17,37 +12,12 @@ public class Game {
 	}
 	
 	
-	public void init (){
-		board = new Field[n][n];
-		initEmpty();
-		addBorders();
+	public void init (BoardBuilderInterface bbi){
+		board = new Board(this.n);
+		bbi.build(board);
 	}
 
-	private void addBorders() {
-		for (int j = 0; j < n; j++) {
-			board[0][j] = new WallField();
-			board[n-1][j] = new WallField();
-			board[j][0] = new WallField();
-			board[j][n-1] = new WallField();
-		}
-		
-	}
-
-	private void initEmpty() {
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				board[i][j] = new EmptyField();
-			}
-		}
-	}
-	
 	public void draw() {
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				board[i][j].draw();
-			}
-			System.out.println("");
-		}
+		board.draw();
 	}
-	
 }

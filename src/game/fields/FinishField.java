@@ -1,6 +1,6 @@
 package game.fields;
 
-public class FinischField extends AvailableField {
+public class FinishField extends AvailableField {
 
 	@Override
 	protected String getSymbol() {
